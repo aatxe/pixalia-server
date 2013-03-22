@@ -9,6 +9,6 @@ Pixalia is a free, open source massively multiplayer online (FOSMMO, thought it'
 n.b. Maven is nice enough to actually handle all of the dependencies.
 
 ### Acknowledgements ###
-* [Aravind Koneru](aravindkoneru), for listening to incessant ranting about how "I'm going to finish networking soon."
-* [Pavan Hegde](pavanh91), for hopefully using this to learn how to use Netty.
+* [Aravind Koneru](https://www.github.com/aravindkoneru), for listening to incessant ranting about how "I'm going to finish networking soon."
+* [Pavan Hegde](https://www.github.com/pavanh91), for hopefully using this to learn how to use Netty.
 * [rice](https://www.github.com/wahlao), for the name, and some inspiration.
