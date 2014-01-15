@@ -12,6 +12,7 @@ public class PlayerJoinPacket extends Packet {
 		this.buffer.writeByte(hostname.getBytes().length);
 		this.buffer.writeBytes(hostname.getBytes());
 		this.buffer.writeBytes(playerColor.asByteBuf(4));
+		trim();
 	}
 
 	public static PlayerJoinPacket newOutboundPacket(String hostname, Vector playerColor) {

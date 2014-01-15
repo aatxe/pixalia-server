@@ -12,6 +12,7 @@ public class VHostChangePacket extends Packet {
 		this.buffer.writeBytes(hostname.getBytes());
 		this.buffer.writeByte(newHostname.getBytes().length);
 		this.buffer.writeBytes(newHostname.getBytes());
+		trim();
 	}
 	
 	public static VHostChangePacket newOutboundPacket(String hostname, String newHostname) {

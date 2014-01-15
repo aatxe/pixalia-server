@@ -10,6 +10,7 @@ public class VHostChangeRequestPacket extends Packet {
 		super(channel, OPCODE);
 		this.packetType = PacketType.OUTBOUND;
 		this.buffer.writeBoolean(status);
+		trim();
 	}
 	
 	private VHostChangeRequestPacket(Channel channel, String desiredVHost) {
@@ -17,6 +18,7 @@ public class VHostChangeRequestPacket extends Packet {
 		this.packetType = PacketType.INBOUND;
 		this.buffer.writeByte(desiredVHost.getBytes().length);
 		this.buffer.writeBytes(desiredVHost.getBytes());
+		trim();
 	}
 	
 	public boolean status() {
