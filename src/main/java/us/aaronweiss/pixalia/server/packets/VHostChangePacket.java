@@ -22,7 +22,7 @@ public class VHostChangePacket extends Packet {
 	public String hostname() {
 		if (this.packetType.is(PacketType.OUTBOUND)) {
 			this.ready();
-			return Utils.readString(this.buffer.readInt(), this.buffer);
+			return Utils.readString(this.buffer.readByte(), this.buffer);
 		}
 		return null;
 	}
@@ -30,8 +30,8 @@ public class VHostChangePacket extends Packet {
 	public String newHostname() {
 		this.ready();
 		if (this.packetType.is(PacketType.OUTBOUND)) {
-			Utils.readString(this.buffer.readInt(), this.buffer);
-			return Utils.readString(this.buffer.readInt(), this.buffer);
+			Utils.readString(this.buffer.readByte(), this.buffer);
+			return Utils.readString(this.buffer.readByte(), this.buffer);
 		}
 		return null;
 	}

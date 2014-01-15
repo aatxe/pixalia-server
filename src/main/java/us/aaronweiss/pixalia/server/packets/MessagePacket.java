@@ -27,7 +27,7 @@ public class MessagePacket extends Packet {
 	public String hostname() {
 		if (this.packetType.is(PacketType.OUTBOUND)) {
 			this.ready();
-			return Utils.readString(this.buffer.readInt(), this.buffer);
+			return Utils.readString(this.buffer.readByte(), this.buffer);
 		}
 		return null;
 	}
@@ -35,9 +35,9 @@ public class MessagePacket extends Packet {
 	public String message() {
 		this.ready();
 		if (this.packetType.is(PacketType.OUTBOUND)) {
-			this.buffer.readBytes(this.buffer.readInt());
+			this.buffer.readBytes(this.buffer.readByte());
 		}
-		return Utils.readString(this.buffer.readInt(), this.buffer);
+		return Utils.readString(this.buffer.readByte(), this.buffer);
 	}
 	
 	public static MessagePacket newOutboundPacket(String hostname, String message) {

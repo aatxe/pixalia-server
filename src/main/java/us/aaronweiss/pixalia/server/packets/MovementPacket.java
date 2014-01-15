@@ -26,7 +26,7 @@ public class MovementPacket extends Packet {
 	public String hostname() {
 		if (this.packetType.is(PacketType.OUTBOUND)) {
 			this.ready();
-			return Utils.readString(this.buffer.readInt(), this.buffer);
+			return Utils.readString(this.buffer.readByte(), this.buffer);
 		}
 		return null;
 	}
@@ -34,7 +34,7 @@ public class MovementPacket extends Packet {
 	public Vector position() {
 		this.ready();
 		if (this.packetType.is(PacketType.OUTBOUND)) {
-			this.buffer.readBytes(this.buffer.readInt());
+			this.buffer.readBytes(this.buffer.readByte());
 		}
 		return Vector.fromByteBuf(2, this.buffer);
 	}

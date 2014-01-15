@@ -19,6 +19,7 @@ import us.aaronweiss.pixalia.server.packets.Packet;
 import us.aaronweiss.pixalia.server.tools.Constants;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class Server {
@@ -38,6 +39,10 @@ public class Server {
 
 	public boolean isHostnamePresent(String hostname) {
 		return world.containsKey(hostname);
+	}
+
+	public Iterator<Pixal> worldIterator() {
+		return world.values().iterator();
 	}
 
 	public Network getNetwork() {

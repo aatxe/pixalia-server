@@ -8,4 +8,5 @@ public class Constants {
 	public static final int SERVER_PORT = 2832;
 	public static final int MAX_FRAME_LENGTH = 300;
 	public static final int HANDLER_COUNT = 5;
+	public static final String CHANNEL_PIXAL_ATTR_NAME = "pixal";
 }

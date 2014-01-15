@@ -32,7 +32,7 @@ public class VHostChangeRequestPacket extends Packet {
 	public String virtualHost() {
 		this.ready();
 		if (this.packetType.is(PacketType.OUTBOUND)) {
-			return Utils.readString(this.buffer.readInt(), this.buffer);
+			return Utils.readString(this.buffer.readByte(), this.buffer);
 		}
 		return null;
 	}

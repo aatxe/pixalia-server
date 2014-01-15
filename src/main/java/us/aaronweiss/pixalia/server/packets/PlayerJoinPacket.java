@@ -15,6 +15,16 @@ public class PlayerJoinPacket extends Packet {
 		trim();
 	}
 
+	private PlayerJoinPacket(String hostname, Vector playerColor, Vector position) {
+		super(OPCODE);
+		this.packetType = PacketType.OUTBOUND;
+		this.buffer.writeByte(hostname.getBytes().length);
+		this.buffer.writeBytes(hostname.getBytes());
+		this.buffer.writeBytes(playerColor.asByteBuf(4));
+		this.buffer.writeBytes(position.asByteBuf(2));
+		trim();
+	}
+
 	public static PlayerJoinPacket newOutboundPacket(String hostname, Vector playerColor) {
 		return new PlayerJoinPacket(hostname, playerColor);
 	}
@@ -22,7 +32,7 @@ public class PlayerJoinPacket extends Packet {
 	public String hostname() {
 		if (this.packetType.is(PacketType.OUTBOUND)) {
 			this.ready();
-			return Utils.readString(this.buffer.readInt(), this.buffer);
+			return Utils.readString(this.buffer.readByte(), this.buffer);
 		}
 		return null;
 	}
@@ -30,8 +40,18 @@ public class PlayerJoinPacket extends Packet {
 	public Vector playerColor() {
 		this.ready();
 		if (this.packetType.is(PacketType.OUTBOUND)) {
-			Utils.readString(this.buffer.readInt(), this.buffer);
+			Utils.readString(this.buffer.readByte(), this.buffer);
 			return Vector.fromByteBuf(4, this.buffer);
+		}
+		return null;
+	}
+
+	public Vector position() {
+		this.ready();
+		if (this.packetType.is(PacketType.OUTBOUND)) {
+			Utils.readString(this.buffer.readByte(), this.buffer);
+			Vector.fromByteBuf(4, this.buffer);
+			return Vector.fromByteBuf(2, this.buffer);
 		}
 		return null;
 	}

@@ -1,10 +1,13 @@
 package us.aaronweiss.pixalia.server.listeners;
 
+import io.netty.util.AttributeKey;
+import us.aaronweiss.pixalia.server.core.Network;
 import us.aaronweiss.pixalia.server.core.Pixal;
 import us.aaronweiss.pixalia.server.core.Server;
 import us.aaronweiss.pixalia.server.packets.HandshakePacket;
 import us.aaronweiss.pixalia.server.packets.Packet;
 import us.aaronweiss.pixalia.server.packets.PlayerJoinPacket;
+import us.aaronweiss.pixalia.server.tools.Constants;
 import us.aaronweiss.pixalia.server.tools.Utils;
 
 public class HandshakeHandler extends PacketHandler {
@@ -28,9 +31,10 @@ public class HandshakeHandler extends PacketHandler {
 		} else {
 			pixal = new Pixal(defaultHost, Utils.getRandomColor());
 		}
-		// TODO: attr pixal to p.channel()
+		p.channel().attr(Network.getChannelPixalAttr()).set(pixal);
 		server.registerPlayer(pixal);
 		server.getNetwork().writeAllExcept(p.channel(), PlayerJoinPacket.newOutboundPacket(pixal.getHostname(), pixal.getColor()));
+
 		return HandshakePacket.newOutboundPacket(p.channel(), hostnameStatus, pixal.getColor());
 	}
 }
