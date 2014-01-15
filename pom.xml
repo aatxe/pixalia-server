@@ -8,22 +8,22 @@
   	<dependency>
   		<groupId>com.google.guava</groupId>
   		<artifactId>guava</artifactId>
-    	<version>14.0</version>
+    	<version>16.0-rc1</version>
   	</dependency>
   	<dependency>
   		<groupId>io.netty</groupId>
   		<artifactId>netty-all</artifactId>
-  		<version>4.0.0.Beta2</version>
+  		<version>4.0.14.Final</version>
   	</dependency>
   	<dependency>
 		<groupId>org.slf4j</groupId>
 		<artifactId>slf4j-api</artifactId>
-		<version>1.7.2</version>
+		<version>1.7.5</version>
 	</dependency>
   	<dependency>
   		<groupId>org.slf4j</groupId>
   		<artifactId>slf4j-simple</artifactId>
-  		<version>1.7.3</version>
+  		<version>1.7.5</version>
   	</dependency>
   </dependencies>
   <build>

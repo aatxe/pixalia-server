@@ -8,6 +8,7 @@ import java.nio.ByteOrder;
 
 public abstract class Packet {
 	protected final Channel channel;
+	protected byte opcode;
 	protected ByteBuf buffer;
 	protected PacketType packetType;
 	
@@ -19,6 +20,7 @@ public abstract class Packet {
 		this.channel = channel;
 		this.createBuffer();
 		this.buffer.writeByte(opcode);
+		this.opcode = opcode;
 	}
 
 	private void createBuffer() {
@@ -29,7 +31,11 @@ public abstract class Packet {
 		this.buffer.resetReaderIndex();
 		this.buffer.readByte();
 	}
-	
+
+	public byte opcode() {
+		return this.opcode;
+	}
+
 	public Channel channel() {
 		return this.channel;
 	}
