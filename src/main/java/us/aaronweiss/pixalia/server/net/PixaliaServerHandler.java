@@ -1,22 +1,23 @@
 package us.aaronweiss.pixalia.server.net;
 
 import io.netty.channel.Channel;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.util.concurrent.GlobalEventExecutor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import us.aaronweiss.pixalia.server.listeners.PacketHandler;
 import us.aaronweiss.pixalia.server.packets.Packet;
 import us.aaronweiss.pixalia.server.tools.Constants;
 import us.aaronweiss.pixalia.server.tools.Utils;
 
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+@ChannelHandler.Sharable
 public class PixaliaServerHandler extends SimpleChannelInboundHandler<Packet> {
-	private static final Logger logger = Logger.getLogger(PixaliaServerHandler.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(PixaliaServerHandler.class.getName());
 	private static final ChannelGroup channels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 	private PacketHandler[] handlers;
 
@@ -58,7 +59,7 @@ public class PixaliaServerHandler extends SimpleChannelInboundHandler<Packet> {
 
 	@Override
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-		logger.log(Level.WARNING, "Unexpected exception caught from downstream.", cause);
+		logger.warn("Unexpected exception caught from downstream.", cause);
 		ctx.close();
 	}
 }

@@ -23,12 +23,13 @@ public class Network {
 	private static final Logger logger = LoggerFactory.getLogger(Network.class);
 	private final ServerBootstrap bootstrap;
 	private final EventLoopGroup bossGroup, workerGroup;
-	private final PixaliaServerHandler handler = new PixaliaServerHandler();
+	private final PixaliaServerHandler handler;
 
 	public Network(Server server) {
 		bossGroup = new NioEventLoopGroup();
 		workerGroup = new NioEventLoopGroup();
 		bootstrap = new ServerBootstrap();
+		handler = new PixaliaServerHandler();
 		handler.register(HandshakeHandler.OPCODE, new HandshakeHandler(server));
 		// TODO: register moar handlers with server.
 		bootstrap.group(bossGroup, workerGroup)

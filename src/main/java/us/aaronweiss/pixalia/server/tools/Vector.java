@@ -82,7 +82,7 @@ public class Vector {
 	}
 	
 	public ByteBuf asByteBuf(int n) {
-		ByteBuf ret = Unpooled.buffer().order(ByteOrder.LITTLE_ENDIAN);
+		ByteBuf ret = Unpooled.buffer();
 		float vec[] = this.asFloatArray(n);
 		for (float f : vec) {
 			ret.writeFloat(f);

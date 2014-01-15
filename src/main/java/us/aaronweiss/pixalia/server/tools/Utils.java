@@ -44,7 +44,8 @@ public class Utils {
 	public static String toHexString(byte[] array) {
 		String ret = "";
 		for (byte b : array) {
-			ret += Integer.toHexString(b) + " ";
+			String s = Integer.toHexString(b);
+			ret += ((s.length() == 1) ? "0" : "") + s + " ";
 		}
 		return ret;
 	}
