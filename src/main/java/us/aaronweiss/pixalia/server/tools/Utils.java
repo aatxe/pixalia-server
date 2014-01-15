@@ -36,7 +36,7 @@ public class Utils {
 	}
 
 	public static String toHexString(ByteBuf buf) {
-		byte[] data = new byte[buf.readableBytes()];
+		byte[] data = new byte[buf.capacity()];
 		buf.getBytes(0, data);
 		return toHexString(data);
 	}

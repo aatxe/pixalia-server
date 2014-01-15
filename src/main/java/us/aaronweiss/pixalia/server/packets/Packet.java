@@ -23,6 +23,10 @@ public abstract class Packet {
 		this.opcode = opcode;
 	}
 
+	protected void trim() {
+		this.buffer.capacity(this.buffer.writerIndex());
+	}
+
 	private void createBuffer() {
 		this.buffer = Unpooled.buffer().order(ByteOrder.LITTLE_ENDIAN);
 	}

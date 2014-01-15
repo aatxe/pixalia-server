@@ -32,7 +32,6 @@ public class PacketDecoder extends ByteToMessageDecoder {
 		switch (opcode) {
 			case HandshakePacket.OPCODE:
 				String username = Utils.readString(in.readByte(), in);
-				logger.info("Handshaked with " + username);
 				if (in.readableBytes() > 2)
 					event = HandshakePacket.newInboundPacket(ctx.channel(), username, Utils.readString(in.readByte(), in));
 				else
