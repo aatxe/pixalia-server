@@ -53,10 +53,19 @@ public class HandshakePacket extends Packet {
 		}
 		return null;
 	}
+
+	public String username() {
+		this.ready();
+		if (this.packetType.is(PacketType.INBOUND)) {
+			return Utils.readString(this.buffer.readByte(), this.buffer);
+		}
+		return null;
+	}
 	
 	public String virtualHost() {
 		this.ready();
 		if (this.packetType.is(PacketType.INBOUND) && this.hasVhost) {
+			Utils.readString(this.buffer.readByte(), this.buffer);
 			return Utils.readString(this.buffer.readByte(), this.buffer);
 		}
 		return null;

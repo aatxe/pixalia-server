@@ -51,7 +51,9 @@ public class PixaliaServerHandler extends SimpleChannelInboundHandler<Packet> {
 		logger.info("Message received: " + Utils.toHexString(packet.array()));
 		Packet response = handlers[packet.opcode()].process(packet);
 		logger.info("Sending out result: " + Utils.toHexString(response.array()));
-		if (response.channel() != null)
+		if (response == null)
+			return;
+		else if (response.channel() != null)
 			response.channel().writeAndFlush(response);
 		else
 			writeAll(response);

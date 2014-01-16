@@ -21,13 +21,13 @@ public class HandshakeHandler extends PacketHandler {
 	public Packet process(Packet event) {
 		HandshakePacket p = (HandshakePacket) event;
 		boolean hostnameStatus = true;
-		String defaultHost = Integer.toHexString(event.channel().remoteAddress().hashCode());
+		String defaultHost = p.username() + "@" + Integer.toHexString(event.channel().remoteAddress().hashCode());
 		Pixal pixal;
 		if (p.hasVirtualHost() && server.isHostnamePresent(p.virtualHost())) {
 			hostnameStatus = false;
 			pixal = new Pixal(defaultHost, Utils.getRandomColor());
 		} else if (p.hasVirtualHost()) {
-			pixal = new Pixal(p.virtualHost(), Utils.getRandomColor());
+			pixal = new Pixal(p.username() + "@" + p.virtualHost(), Utils.getRandomColor());
 		} else {
 			pixal = new Pixal(defaultHost, Utils.getRandomColor());
 		}
