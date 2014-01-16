@@ -9,11 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import us.aaronweiss.pixalia.server.core.Server;
-import us.aaronweiss.pixalia.server.packets.HandshakePacket;
-import us.aaronweiss.pixalia.server.packets.MessagePacket;
-import us.aaronweiss.pixalia.server.packets.MovementPacket;
-import us.aaronweiss.pixalia.server.packets.Packet;
-import us.aaronweiss.pixalia.server.packets.VHostChangeRequestPacket;
+import us.aaronweiss.pixalia.server.packets.*;
 import us.aaronweiss.pixalia.server.tools.Utils;
 import us.aaronweiss.pixalia.server.tools.Vector;
 
@@ -46,6 +42,8 @@ public class PacketDecoder extends ByteToMessageDecoder {
 			case VHostChangeRequestPacket.OPCODE:
 				event = VHostChangeRequestPacket.newInboundPacket(ctx.channel(), Utils.readString(in.readByte(), in));
 				break;
+			case PlayerQuitPacket.OPCODE:
+				event = PlayerQuitPacket.newInboundPacket(ctx.channel());
 			default:
 				logger.debug("Unexpected packet recieved. (Opcode: " + opcode + ")");
 		}

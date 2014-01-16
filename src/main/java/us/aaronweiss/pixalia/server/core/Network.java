@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import us.aaronweiss.pixalia.server.listeners.HandshakeHandler;
 import us.aaronweiss.pixalia.server.listeners.MessageHandler;
 import us.aaronweiss.pixalia.server.listeners.MovementHandler;
+import us.aaronweiss.pixalia.server.listeners.PlayerQuitHandler;
 import us.aaronweiss.pixalia.server.net.PacketDecoder;
 import us.aaronweiss.pixalia.server.net.PacketEncoder;
 import us.aaronweiss.pixalia.server.net.PixaliaServerHandler;
@@ -42,6 +43,7 @@ public class Network {
 		handler.register(HandshakeHandler.OPCODE, new HandshakeHandler(server));
 		handler.register(MovementHandler.OPCODE, new MovementHandler(server));
 		handler.register(MessageHandler.OPCODE, new MessageHandler(server));
+		handler.register(PlayerQuitHandler.OPCODE, new PlayerQuitHandler(server));
 		// TODO: register moar handlers with server.
 		bootstrap.group(bossGroup, workerGroup)
 				.channel(NioServerSocketChannel.class)

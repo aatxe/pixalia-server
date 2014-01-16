@@ -16,7 +16,7 @@ public class MessageHandler extends PacketHandler {
 	@Override
 	public Packet process(Packet event) {
 		MessagePacket p = (MessagePacket) event;
-		Pixal px = (Pixal) p.channel().attr(Network.getChannelPixalAttr()).get();
+		Pixal px = p.channel().attr(Network.getChannelPixalAttr()).get();
 		if (p.message().length() == 0)
 			return null;
 		return MessagePacket.newOutboundPacket(px.getHostname(), p.message());

@@ -34,8 +34,8 @@ public class PlayerJoinPacket extends Packet {
 	}
 
 	public String hostname() {
+		this.ready();
 		if (this.packetType.is(PacketType.OUTBOUND)) {
-			this.ready();
 			return Utils.readString(this.buffer.readByte(), this.buffer);
 		}
 		return null;

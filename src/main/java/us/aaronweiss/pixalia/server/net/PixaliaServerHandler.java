@@ -9,10 +9,16 @@ import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.util.concurrent.GlobalEventExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import us.aaronweiss.pixalia.server.core.Network;
+import us.aaronweiss.pixalia.server.core.Pixal;
+import us.aaronweiss.pixalia.server.core.Server;
 import us.aaronweiss.pixalia.server.listeners.PacketHandler;
 import us.aaronweiss.pixalia.server.packets.Packet;
+import us.aaronweiss.pixalia.server.packets.PlayerQuitPacket;
 import us.aaronweiss.pixalia.server.tools.Constants;
 import us.aaronweiss.pixalia.server.tools.Utils;
+
+import java.io.IOException;
 
 
 @ChannelHandler.Sharable
@@ -61,7 +67,13 @@ public class PixaliaServerHandler extends SimpleChannelInboundHandler<Packet> {
 
 	@Override
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-		logger.warn("Unexpected exception caught from downstream.", cause);
+		if (cause instanceof IOException) {
+			Pixal px = ctx.channel().attr(Network.getChannelPixalAttr()).get();
+			writeAllExcept(ctx.channel(), PlayerQuitPacket.newOutboundPacket(px.getHostname()));
+			Server.getInstance().unregisterPlayer(px);
+		} else {
+			logger.warn("Unexpected exception caught from downstream.", cause);
+		}
 		ctx.close();
 	}
 }

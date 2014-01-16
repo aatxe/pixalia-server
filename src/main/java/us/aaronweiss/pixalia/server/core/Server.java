@@ -41,6 +41,10 @@ public class Server {
 		return world.containsKey(hostname);
 	}
 
+	public void unregisterPlayer(Pixal pixal) {
+		world.remove(pixal.getHostname());
+	}
+
 	public Iterator<Pixal> worldIterator() {
 		return world.values().iterator();
 	}

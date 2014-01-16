@@ -18,7 +18,7 @@ public class MovementHandler extends PacketHandler {
 	@Override
 	public Packet process(Packet event) {
 		MovementPacket p = (MovementPacket) event;
-		Pixal px = (Pixal) p.channel().attr(Network.getChannelPixalAttr()).get();
+		Pixal px = p.channel().attr(Network.getChannelPixalAttr()).get();
 		// TODO: validate movement, maybe?
 		px.setPosition(p.position());
 		return MovementPacket.newOutboundPacket(px.getHostname(), px.getPosition());
