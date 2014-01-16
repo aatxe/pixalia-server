@@ -34,7 +34,7 @@ public class HandshakeHandler extends PacketHandler {
 		p.channel().attr(Network.getChannelPixalAttr()).set(pixal);
 		server.registerPlayer(pixal);
 		server.getNetwork().writeAllExcept(p.channel(), PlayerJoinPacket.newOutboundPacket(pixal.getHostname(), pixal.getColor()));
-
+		server.getNetwork().notifyOfPresentPixals(p.channel());
 		return HandshakePacket.newOutboundPacket(p.channel(), hostnameStatus, pixal.getColor());
 	}
 }

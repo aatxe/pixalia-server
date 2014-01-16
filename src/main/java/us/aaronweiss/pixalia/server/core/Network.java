@@ -68,7 +68,7 @@ public class Network {
 		while (i.hasNext()) {
 			Pixal p = i.next();
 			if (p != ch.attr(Network.CHANNEL_PIXAL_ATTR).get())
-				ch.writeAndFlush(PlayerJoinPacket.newOutboundPacket(p.getHostname(), p.getPosition()));
+				ch.writeAndFlush(PlayerJoinPacket.newOutboundPacket(p.getHostname(), p.getColor(), p.getPosition()));
 		}
 	}
 

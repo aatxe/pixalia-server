@@ -6,13 +6,17 @@ public class Pixal {
 	private final String hostname;
 	private Vector position;
 	protected Vector color;
-	
+
 	public Pixal(String hostname, Vector color) {
+		this(hostname, new Vector(0f, 0f), color);
+	}
+
+	public Pixal(String hostname, Vector position, Vector color) {
 		this.hostname = hostname;
-		this.position = new Vector(0f, 0f);
+		this.position = position;
 		this.color = color;
 	}
-	
+
 	public String getHostname() {
 		return this.hostname;
 	}
